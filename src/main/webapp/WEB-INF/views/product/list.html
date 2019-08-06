@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>List Products</title>
+    <meta charset="UTF-8">
+    <title>Reception List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <style>
+        .productName, .price, .order, .view {
+            text-align: center;
+        }
+
+        .productName {
+            font-weight: bold;
+        }
+
+        .thumbnail a {
+            margin-right: 5px;
+            text-align: center;
+            float: left;
+        }
+
+        .thumbnail {
+            padding: 10px;
+        }
+
+        .order {
+            margin-left: 20%;
+        }
+    </style>
+</head>
+<body>
+<header class="col-md-8">
+    <h2>Product List</h2>
+    <p>
+        <a href="/create-product">Create New Product</a>
+    </p>
+    <form class="searchForm">
+        <h3>Search by name:</h3>
+        <div class="input-group">
+            <input type="text" name="search" class="form-control">
+            <div class="input-group-btn">
+                <input type="submit" value="Search" class="btn btn-outline-info">
+            </div>
+        </div>
+    </form>
+</header>
+<div class="container">
+    <div class="row">
+        <th:block th:each="product:${products}">
+            <div class="col-xs-12 col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <img th:src="@{'/image/'+${product.image}}" class="img-thumbnail">
+                    <div th:text="${product.name}" class="productName"></div>
+                    <div th:text="${product.price}" class="price"></div>
+                    <div class="order"><a th:href="@{/order-product/__${product.id}__}" class="btn btn-outline-success">Order</a>
+                    </div>
+                    <div class="view"><a th:href="@{/view-product/__${product.id}__}"
+                                         class="btn btn-outline-info">View</a></div>
+                </div>
+            </div>
+        </th:block>
+    </div>
+</div>
+
+</body>
+</html>

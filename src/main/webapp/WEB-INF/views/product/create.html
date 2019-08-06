@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create new Product</title>
+</head>
+<body>
+<header class="col-md-8">
+    <h2>Create Product</h2>
+    <p><a href="/products" class="btn btn-outline-primary">Back to List</a></p>
+    <th:block th:if="${message}">
+        <p th:text="${message}" style="color: red"></p>
+    </th:block>
+</header>
+<form th:action="@{/create-product}"
+      th:object="${productForm}"
+      method="post"
+      enctype="multipart/form-data" class="col-md-6">
+    <table class="table table-striped">
+        <tr>
+            <td>Image</td>
+            <td><input type="file" th:field="*{image}" class="btn btn-outline-warning"></td>
+        </tr>
+        <tr>
+            <td>ID</td>
+            <td><input type="text" th:field="*{id}" class="form-control"></td>
+        </tr>
+        <tr>
+            <td>Name</td>
+            <td><input type="text" th:field="*{name}" class="form-control"></td>
+        </tr>
+        <tr>
+            <td>Price</td>
+            <td><input type="text" th:field="*{price}" class="form-control"></td>
+        </tr>
+        <tr>
+            <td>Description</td>
+            <td><input type="text" th:field="*{description}" class="form-control"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Create" class="btn btn-outline-success"></td>
+        </tr>
+
+    </table>
+</form>
+</body>
+</html>
