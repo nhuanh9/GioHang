@@ -93,14 +93,9 @@ public class ProductController {
     @GetMapping("/delete-product-order/{id}")
     public ModelAndView deleteProductFromCart(@PathVariable int id) {
         ModelAndView modelAndView = new ModelAndView("/product/order");
-        try {
-            for (int i = 0; i <= productOrder.size(); i++) {
-                if (productOrder.get(i).getId() == id) {
-                    productOrder.remove(i);
-                }
-            }
-        } catch (Exception e){
-            return modelAndView;
+        Product product = productService.findById(id);
+        while (productOrder.contains(product)){
+            productOrder.remove(product);
         }
         modelAndView.addObject("products", productOrder);
         return modelAndView;
